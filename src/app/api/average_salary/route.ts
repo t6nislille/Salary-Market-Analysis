@@ -38,8 +38,20 @@ const res = await fetch(URL!, {
     body: JSON.stringify(body),
     headers: {"Content-Type": "application/json"},
 });
+
 // Read JSON
 const data = await res.json();
-return NextResponse.json({data});
+
+// Get years from values
+const years = Object.keys(data.dimension.Vaatlusperiood.category.index);
+
+// Get average salary from values
+const values = data.value;
+
+return NextResponse.json({
+  fieldValue,
+  years,
+  values});
 
 }
+
