@@ -7,28 +7,9 @@ export async function POST (req: Request) {
 
     const body = {
   "query": [
-    {
-      "code": "Näitaja",
-      "selection": {
-        "filter": "item",
-        "values": [
-          "GR_W_AVG"
-        ]
-      }
-    },
-    {
-      "code": "Tegevusala",
-      "selection": {
-        "filter": "item",
-        "values": [
-          fieldValue
-        ]
-      }
-    }
-  ],
-  "response": {
-    "format": "json-stat2"
-  }
+    {"code": "Näitaja", "selection": { "filter": "item", "values": [ "GR_W_AVG" ] } },
+    { "code": "Tegevusala", "selection": { "filter": "item", "values": [ fieldValue ] } } ],
+  "response": { "format": "json-stat2" }
 };
 
 // Making a request
@@ -52,6 +33,5 @@ return NextResponse.json({
   fieldValue,
   years,
   values});
-
 }
 
