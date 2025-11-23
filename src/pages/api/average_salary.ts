@@ -1,7 +1,9 @@
 import type { NextResponse } from "next/server";
 
+// Route Handler
 export async function POST (req: Request) {
     const { fieldValue } = await req.json();
+
     const body = {
   "query": [
     {
@@ -27,4 +29,9 @@ export async function POST (req: Request) {
     "format": "json-stat2"
   }
 };
+
+// Making a request
+const res = await fetch(URL, {
+    method: "POST",
+});
 }
