@@ -1,7 +1,8 @@
-import type { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 // Route Handler
 export async function POST (req: Request) {
+    // "Tegevusala"
     const { fieldValue } = await req.json();
 
     const body = {
@@ -37,4 +38,8 @@ const res = await fetch(URL!, {
     body: JSON.stringify(body),
     headers: {"Content-Type": "application/json"},
 });
+// Read JSON
+const data = await res.json();
+return NextResponse.json({data});
+
 }
