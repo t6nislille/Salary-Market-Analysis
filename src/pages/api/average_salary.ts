@@ -34,5 +34,7 @@ export async function POST (req: Request) {
 const URL = process.env.STAT_API_URL;
 const res = await fetch(URL!, {
     method: "POST",
+    body: JSON.stringify(body),
+    headers: {"Content-Type": "application/json"},
 });
 }
