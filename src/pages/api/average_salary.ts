@@ -31,7 +31,8 @@ export async function POST (req: Request) {
 };
 
 // Making a request
-const res = await fetch(URL, {
+const URL = process.env.STAT_API_URL;
+const res = await fetch(URL!, {
     method: "POST",
 });
 }
