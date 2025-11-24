@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 // Route Handler
 export async function POST (req: Request) {
+  try {
     // "Tegevusala"
     const { fieldValue } = await req.json();
 
@@ -33,5 +34,9 @@ return NextResponse.json({
   fieldValue,
   years,
   values});
+} catch (err) {
+  console.error(err);
+  return NextResponse.json({error: "Failed to fetch data"}, {status: 500});
+}
 }
 
