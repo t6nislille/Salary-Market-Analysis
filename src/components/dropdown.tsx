@@ -25,9 +25,14 @@ return (
             disallowEmptySelection
             selectedKeys={selectedKeys}
             selectionMode="single"
-            onSelectionChange={setSelectedKeys}>
+            onSelectionChange={setSelectedKeys}
+        >
+            <DropdownItem key={"text"}>Text</DropdownItem>
+            <DropdownItem key={"A01"}>Taime- ja loomakasvatus, jahindus ja neid teenindavad tegevusalad</DropdownItem>
+            <DropdownItem key={"A02"}>Metsamajandus ja metsavarumine</DropdownItem>
+            <DropdownItem key={"A03"}>Kalapüük ja vesiviljelus</DropdownItem>
 
         </DropdownMenu>
     </Dropdown>
 );
-};
+}
