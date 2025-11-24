@@ -1,3 +1,4 @@
+import { error } from "console";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -30,7 +31,8 @@ export async function GET() {
 
     // Return fields
     return NextResponse.json({ fields });
-
-
+    } catch (err) {
+        console.error(err);
+        return NextResponse.json({ error: "Failed to fetch fields"}, { status: 500});
     }
 }
