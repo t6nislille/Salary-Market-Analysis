@@ -22,7 +22,10 @@ return (
             </Button>
         </DropdownTrigger>
         <DropdownMenu
-            >
+            disallowEmptySelection
+            selectedKeys={selectedKeys}
+            selectionMode="single"
+            onSelectionChange={setSelectedKeys}>
 
         </DropdownMenu>
     </Dropdown>
