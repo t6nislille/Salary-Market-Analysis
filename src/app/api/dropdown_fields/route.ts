@@ -22,8 +22,15 @@ export async function GET() {
     // Read JSON
     const data = await res.json();
 
-    // List for field names
-    
+    // List for field names (key + label)
+    const fields = Object.entries(data.dimension.Tegevusala.category.label).map(([key, label]) => ({
+        key,
+        label
+    }));
+
+    // Return fields
+    return NextResponse.json({ fields });
+
 
     }
 }
