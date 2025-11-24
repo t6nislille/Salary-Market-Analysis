@@ -8,7 +8,7 @@ type Field = { key: string; label: string };
 // Hold Keys as Set
 // First value is "text"
 export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> void}) {
-    const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(["text"]));
+    const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set());
 
     // Hold labels
     const [selectedLabel, setSelectedLabel] = useState("Text");
@@ -47,7 +47,7 @@ return (
             </Button>
         </DropdownTrigger>
         <DropdownMenu
-            disallowEmptySelection
+            disallowEmptySelection={false}
             selectedKeys={selectedKeys}
             selectionMode="single"
             onSelectionChange={handleSelect}
