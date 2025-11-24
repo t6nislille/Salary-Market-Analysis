@@ -24,15 +24,17 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
             setFields(data.fields);
         };
         fetchFields();
+
+        // Activate one time
     }, []);
 
-
-    // Update state of dropdown & inform parent
+    // Match label to key
     const haldleSelect = (keys: Selection) => {
         setSelectedKeys(keys);
-        
-        // Show first key
-        onSelect(Array.from(keys)[0] as string);
+        const key = Array.from(keys)[0] as string;
+        const label = fields.find(f => f.key === key)?.label || key;
+        setSelectedLabel(label);
+        onSelect(key);
     };
 
 
