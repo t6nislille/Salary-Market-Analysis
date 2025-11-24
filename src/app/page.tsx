@@ -27,6 +27,7 @@ export default function Home() {
     const data = await response.json();
 
     // Save data as
+    setSelectedName(data.valueText);
     setYears(data.years);
     setSalaryData(data.values);
   };
@@ -40,8 +41,8 @@ export default function Home() {
         <h2>Valdkond: {selectedName}</h2>
         {years.map((year, index) => (
           <p key={year}>
-            <span>{year}:</span>
-            <span>{salaryData[index]}</span>
+            <span>{year}: </span>
+            <span>{salaryData[index]} €</span>
           </p>
         ))}
 

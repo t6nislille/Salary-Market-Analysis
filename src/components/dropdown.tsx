@@ -16,6 +16,8 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
     // Update state of dropdown & inform parent
     const haldleSelect = (keys: Selection) => {
         setSelectedKeys(keys);
+        
+        // Show first key
         onSelect(Array.from(keys)[0] as string);
     };
 
