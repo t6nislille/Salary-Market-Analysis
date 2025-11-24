@@ -1,14 +1,15 @@
 "use client";
 import React, {useState} from "react";
-import fieldDropdown from "../components/dropdown";
+import FieldDropdown from "../components/dropdown";
 
 export default function Home() {
+
   return (
-    <div className="">
-      <main className="">
+    <main className="flex flex-col items-center">
+      <h1 className="text-3xl font-bold">Keskmine palk</h1>
+      
+      <FieldDropdown />
 
-
-      </main>
-    </div>
+    </main>
   );
 }
