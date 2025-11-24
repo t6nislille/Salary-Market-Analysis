@@ -1,17 +1,31 @@
 import type { Selection } from "@heroui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@heroui/react";
+
+// Set types
+type Field = { key: string; label: string };
 
 // Hold Keys as Set
 // First value is "text"
 export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> void}) {
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(["text"]));
 
-    // Convert Set to String
-    const selectedValue = React.useMemo(
-        () => Array.from(selectedKeys).join(", "),
-        [selectedKeys],
-    );
+    // Hold labels
+    const [selectedLabel, setSelectedLabel] = useState("Text");
+
+    // Hold fields
+    const [fields, setFields] = useState<Field[]>([]);
+
+    // Fetch fields
+    useEffect(() => {
+        const fetchFields = async () => {
+            const res = await fetch("/api/dropdown_fields");
+            const data = await res.json();
+            setFields(data.fields);
+        };
+        fetchFields();
+    }, []);
+
 
     // Update state of dropdown & inform parent
     const haldleSelect = (keys: Selection) => {
