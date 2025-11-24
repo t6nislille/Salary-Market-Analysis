@@ -4,7 +4,7 @@ import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@he
 
 // Hold Keys as Set
 // First value is "text"
-export default function FieldDropdown() {
+export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> void}) {
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(["text"]));
 
     // Convert Set to String
@@ -12,6 +12,12 @@ export default function FieldDropdown() {
         () => Array.from(selectedKeys).join(", "),
         [selectedKeys],
     );
+
+    // Update state of dropdown & inform parent
+    const haldleSelect = (keys: Selection) => {
+        setSelectedKeys(keys);
+        onSelect(Array.from(keys)[0] as string);
+    }
 
 
 return (
