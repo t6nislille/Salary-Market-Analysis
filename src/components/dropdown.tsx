@@ -11,5 +11,16 @@ export default function fieldDropdown() {
     const selectedValue = React.useMemo(
         () => Array.from(selectedKeys).join(", "),
         [selectedKeys],
-    )
-}
+    );
+
+
+return (
+    <Dropdown>
+        <DropdownTrigger>
+            <Button className="capitalize" variant="bordered">
+                {selectedValue}
+            </Button>
+        </DropdownTrigger>
+    </Dropdown>
+);
+};
