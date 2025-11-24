@@ -37,12 +37,11 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
         onSelect(key);
     };
 
-
 return (
     <Dropdown>
         <DropdownTrigger>
             <Button className="capitalize" variant="bordered">
-                {selectedValue}
+                {selectedLabel}
             </Button>
         </DropdownTrigger>
         <DropdownMenu
@@ -51,11 +50,11 @@ return (
             selectionMode="single"
             onSelectionChange={haldleSelect}
         >
-            <DropdownItem key={"text"}>Text</DropdownItem>
-            <DropdownItem key={"A01"}>Taime- ja loomakasvatus, jahindus ja neid teenindavad tegevusalad</DropdownItem>
-            <DropdownItem key={"A02"}>Metsamajandus ja metsavarumine</DropdownItem>
-            <DropdownItem key={"A03"}>Kalapüük ja vesiviljelus</DropdownItem>
-
+            {fields.map(f => (
+                <DropdownItem key={f.key} textValue={f.label}>
+                    {f.label}
+                </DropdownItem>
+            ))}
         </DropdownMenu>
     </Dropdown>
 );
