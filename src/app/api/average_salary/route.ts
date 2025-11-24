@@ -30,10 +30,16 @@ const years = Object.keys(data.dimension.Vaatlusperiood.category.index);
 // Get average salary from values
 const values = data.value;
 
+// Get field valueTexts
+const index = data.dimension.Tegevusala.category.index[fieldValue];
+const valueText = data.dimension.Tegevusala.category.label[fieldValue] || fieldValue;
+
 return NextResponse.json({
   fieldValue,
+  valueText,
   years,
   values});
+
 } catch (err) {
   console.error(err);
   return NextResponse.json({error: "Failed to fetch data"}, {status: 500});
