@@ -18,7 +18,12 @@ export default function Home() {
     setSelectedName(categoryKey);
 
     // API call from average_salary
-    const response = await fetch(`/api/average_salary?fieldValue=${categoryKey}`);
+    const response = await fetch(`/api/average_salary`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({fieldValue: categoryKey})
+    });
+
     const data = await response.json();
 
     // Save data as
@@ -33,6 +38,12 @@ export default function Home() {
       <FieldDropdown onSelect={handleSelect} />
       <div>
         <h2>Valdkond: {selectedName}</h2>
+        {years.map((year, index) => (
+          <p key={year}>
+            <span>{year}:</span>
+            <span>{salaryData[index]}</span>
+          </p>
+        ))}
 
       </div>
 
