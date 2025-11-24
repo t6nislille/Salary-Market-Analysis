@@ -19,7 +19,9 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
     // Fetch fields
     useEffect(() => {
         const fetchFields = async () => {
-            const res = await fetch("/api/dropdown_fields");
+            const res = await fetch("/api/dropdown_fields", {
+                method: "POST"
+            });
             const data = await res.json();
             setFields(data.fields);
         };
@@ -29,7 +31,7 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
     }, []);
 
     // Match label to key
-    const haldleSelect = (keys: Selection) => {
+    const handleSelect = (keys: Selection) => {
         setSelectedKeys(keys);
         const key = Array.from(keys)[0] as string;
         const label = fields.find(f => f.key === key)?.label || key;
@@ -48,9 +50,9 @@ return (
             disallowEmptySelection
             selectedKeys={selectedKeys}
             selectionMode="single"
-            onSelectionChange={haldleSelect}
+            onSelectionChange={handleSelect}
         >
-            {fields.map(f => (
+            {fields?.map(f => (
                 <DropdownItem key={f.key} textValue={f.label}>
                     {f.label}
                 </DropdownItem>
