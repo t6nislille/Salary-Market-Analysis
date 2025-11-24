@@ -17,7 +17,7 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
     const haldleSelect = (keys: Selection) => {
         setSelectedKeys(keys);
         onSelect(Array.from(keys)[0] as string);
-    }
+    };
 
 
 return (
@@ -31,7 +31,7 @@ return (
             disallowEmptySelection
             selectedKeys={selectedKeys}
             selectionMode="single"
-            onSelectionChange={setSelectedKeys}
+            onSelectionChange={haldleSelect}
         >
             <DropdownItem key={"text"}>Text</DropdownItem>
             <DropdownItem key={"A01"}>Taime- ja loomakasvatus, jahindus ja neid teenindavad tegevusalad</DropdownItem>
