@@ -5,7 +5,7 @@ export default function AiSummary({ fieldName, years, values }) {
     const [summary, setSummary] = useState("");
 
     useEffect(() => {
-
+        
         // Fetch from API route
         const fetchSummary = async () => {
         const res = await fetch("/api/ai_summery", {
@@ -30,8 +30,8 @@ export default function AiSummary({ fieldName, years, values }) {
     if (!fieldName) return null;
 
     return (
-        <div >
-            <h3>Palgatrendi kokkuvõte OpenAI abiga</h3>
+        <div className="mt-5 p-6 bg-gray-40 border rounded-lg shadow">
+            <h3 className="font-semibold mb-2">Palgatrendi kokkuvõte AI abiga</h3>
             <pre className="whitespace-pre-wrap text-sm leading-relaxed">
                 {summary}
             </pre>
