@@ -1,6 +1,7 @@
 "use client";
 import React, {useState} from "react";
 import FieldDropdown from "../components/dropdown";
+import AiSummary from "../components/ai_summery";
 
 // Display average salary data in dropdown menu selection
 export default function Home() {
@@ -20,6 +21,8 @@ export default function Home() {
     });
 
     const data = await response.json();
+
+    // Save returned data
     setSelectedName(data.valueText);
     setYears(data.years);
     setSalaryData(data.values);
@@ -38,6 +41,7 @@ export default function Home() {
           </p>
         ))}
       </div>
+      {/* Summary from OpenAI */}
     </main>
   );
 }
