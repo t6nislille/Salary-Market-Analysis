@@ -5,36 +5,41 @@ import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@he
 // Set types
 type Field = { key: string; label: string };
 
-// Hold Keys as Set
-// First value is "text"
+// Dropdown components
 export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> void}) {
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set());
-
-    // Hold labels
     const [selectedLabel, setSelectedLabel] = useState("Vali Valdkond:");
-
-    // Hold fields
     const [fields, setFields] = useState<Field[]>([]);
 
     // Fetch fields
     useEffect(() => {
         const fetchFields = async () => {
             const res = await fetch("/api/dropdown_fields", {
-                method: "POST"
+                method: "POST",
+                body: JSON.stringify({})
             });
+
             const data = await res.json();
-            setFields(data.fields);
+            const fields = data.fields ?? [];
+            setFields(fields);
+
+            // Automatically select first item
+            if (fields.length > 0) {
+                const firstKey = fields[0].key;
+                setSelectedKeys(new Set([firstKey]));
+                setSelectedLabel(fields[0].label);
+                onSelect(firstKey);
+            }           
         };
         fetchFields();
-
-        // Activate one time
+        // Activate once
     }, []);
 
-    // Match label to key
+    // Uptate dropdown
     const handleSelect = (keys: Selection) => {
-        setSelectedKeys(keys);
         const key = Array.from(keys)[0] as string;
         const label = fields.find(f => f.key === key)?.label || key;
+        setSelectedKeys(keys);
         setSelectedLabel(label);
         onSelect(key);
     };
@@ -46,18 +51,20 @@ return (
                 {selectedLabel}
             </Button>
         </DropdownTrigger>
+        {fields.length > 0 && (
         <DropdownMenu
             disallowEmptySelection={false}
             selectedKeys={selectedKeys}
             selectionMode="single"
             onSelectionChange={handleSelect}
         >
-            {fields?.map(f => (
-                <DropdownItem key={f.key} textValue={f.label}>
+            {fields.map((f) => (
+                <DropdownItem key={f.key} textValue={f.key}>
                     {f.label}
                 </DropdownItem>
             ))}
         </DropdownMenu>
+        )}
     </Dropdown>
 );
 }
