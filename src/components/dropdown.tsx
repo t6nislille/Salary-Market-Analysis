@@ -59,9 +59,7 @@ return (
             onSelectionChange={handleSelect}
         >
             {fields.map((f) => (
-                <DropdownItem key={f.key} textValue={f.key}>
-                    {f.label}
-                </DropdownItem>
+                <DropdownItem key={f.key}>{f.label}</DropdownItem>
             ))}
         </DropdownMenu>
         )}
