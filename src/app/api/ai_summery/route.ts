@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
 
     // Parse values
-    const { fieldName } = await req.json();
+    const { fieldName, years, values } = await req.json();
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
@@ -15,9 +15,11 @@ export async function POST(req: Request) {
         );
     }
 
-    const prompt = 
-    'Sinu käes on Eesti keskmise palga andmed valdkonna "${fieldName}" kohta.'
-
+    const prompt = `
+Sinu käes on Eesti keskmise palga andmed valdkonna "${fieldName}" kohta.
+Aastad: ${years.join(", ")}
+Keskmine brutokuupalk (samas järjekorras): ${values.join(", ")}
+                    `
     // Make a request to OpenAI API
     const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
