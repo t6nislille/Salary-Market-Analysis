@@ -18,10 +18,14 @@ export default function Home() {
   // Track error from API calls
   const [error, setError] = useState("");
 
+  // Tracks loading state
+  const [loading, setLoading] = useState(false)
+
   // Update active field when value is selected
   const handleSelect = async (categoryKey: string) => {
     try {
       setError("");
+      setLoading(true);
 
     // Fetch from api/average_salary
     const response = await fetch(`/api/average_salary`, {
@@ -42,6 +46,9 @@ export default function Home() {
     } catch (err) {
       console.error(err);
       setError("Palgaandmete laadimine ebaõnnestus!");
+    } finally {
+      // Turns off loading
+      setLoading(false);
     }
   };
 

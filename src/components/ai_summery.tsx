@@ -7,6 +7,9 @@ export default function AiSummary({ fieldName, years, values }) {
     // Track errors
     const [error, setError] = useState("");
 
+    // Show loader while API responds
+    const [loading, setLoading] = useState(false);
+
     // Runs every time a change happens
     useEffect(() => {
         // Prevents running in empty state
@@ -17,6 +20,7 @@ export default function AiSummary({ fieldName, years, values }) {
             try {
                 setSummary("");
                 setError("");
+                setLoading(true);
                 
             
         
@@ -37,6 +41,9 @@ export default function AiSummary({ fieldName, years, values }) {
         } catch (err) {
             console.error(err);
             setError("Kokkuvõtte loomine ebaõnnestus!");
+        } finally {
+            // Turns off loading
+            setLoading(false);
         }
 
         } 
@@ -48,6 +55,9 @@ export default function AiSummary({ fieldName, years, values }) {
 
     // Error message in UI
     if (error) return <p className="text-red-500">{error}</p>;
+
+    // Loading state display
+    if (loading) return <p>Kokkuvõtte laadimine...</p>;
 
     return (
         <div className="mt-5 p-6 bg-gray-40 border rounded-lg shadow">
