@@ -11,7 +11,7 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set());
 
     // Hold labels
-    const [selectedLabel, setSelectedLabel] = useState("Text");
+    const [selectedLabel, setSelectedLabel] = useState("Vali Valdkond:");
 
     // Hold fields
     const [fields, setFields] = useState<Field[]>([]);
