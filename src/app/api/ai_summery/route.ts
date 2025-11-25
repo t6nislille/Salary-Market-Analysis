@@ -57,4 +57,9 @@ Vasta eesti keeles, struktureeritult:
             temperature: 0.4, 
         }),
     });
+
+    // Extract summery from API response
+    const json = await openAiRes.json();
+    const summery = json.choices?.[0]?.message?.content ??
+                    "Kokkuvõtte loomisel tekkis viga!";
 }
