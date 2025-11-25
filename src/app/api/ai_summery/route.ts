@@ -58,8 +58,11 @@ Vasta eesti keeles, struktureeritult:
         }),
     });
 
-    // Extract summery from API response
+    // Extract summary from API response
     const json = await openAiRes.json();
-    const summery = json.choices?.[0]?.message?.content ??
+    const summary = json.choices?.[0]?.message?.content ??
                     "Kokkuvõtte loomisel tekkis viga!";
+
+    // Return summary
+    return NextResponse.json({ summary });
 }
