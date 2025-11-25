@@ -15,6 +15,9 @@ export default function AiSummary({ fieldName, years, values }) {
         });
 
         const data = await res.json();
+
+        // Save summary to UI
+        setSummary(data.summary);
         }
 
         fetchSummary();
@@ -23,6 +26,9 @@ export default function AiSummary({ fieldName, years, values }) {
     return (
         <div>
             <h3>Palgatrendi kokkuvõte OpenAI abiga</h3>
+            <pre className="whitespace-pre-wrap text-sm leading-relaxed">
+                {summary}
+            </pre>
         </div>
     );
 }
