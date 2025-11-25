@@ -5,13 +5,23 @@ import AiSummary from "../components/ai_summery";
 
 // Display average salary data in dropdown menu selection
 export default function Home() {
+
+  // Holds all salary numbers
   const [salaryData, setSalaryData] = useState<number[]>([]);
+
+  // Holds all salary years
   const [years, setYears] = useState<string[]>([]);
+
+  // Holds selected field label
   const [selectedName, setSelectedName] = useState<string>("");
+
+  // Track error from API calls
+  const [error, setError] = useState("");
 
   // Update active field when value is selected
   const handleSelect = async (categoryKey: string) => {
     try {
+      setError("");
 
     // Fetch from api/average_salary
     const response = await fetch(`/api/average_salary`, {
@@ -31,6 +41,7 @@ export default function Home() {
 
     } catch (err) {
       console.error(err);
+      setError("Palgaandmete laadimine ebaõnnestus!");
     }
   };
 
