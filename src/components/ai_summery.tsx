@@ -3,13 +3,13 @@ import { fetchAiSummary } from "../lib/api";
 import type { AiSummaryResponse } from "../lib/types";
 
 // Define types
-interface AiSummaryTypes {
+interface AiSummaryProps {
     fieldName: string;
     years: string[];
     values: number[];
 }
 
-export default function AiSummary(props: AiSummaryTypes) {
+export default function AiSummary(props: AiSummaryProps) {
     const {fieldName, years, values} = props;
 
     // Summary returned by the API
@@ -27,26 +27,20 @@ export default function AiSummary(props: AiSummaryTypes) {
         if (!fieldName) return;
 
         // Fetch from API route
-        async function fetchSummary() {
+        async function loadSummary() {
             try {
                 setSummary("");
                 setError("");
                 setLoading(true);
                 
-                // Call api/ai_summery route
-                const res = await fetch("/api/ai_summery", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({fieldName, years, values}),
-                });
-
-                // HTTP error handle
-                if (!res.ok) throw new Error("AI summary failed!");
-
-                const data = await res.json();
-
-                // Save summary to UI
-                setSummary(data.summary);
+                // Call Groq using lib/api.ts
+                const result: AiSummaryResponse = await fetchAiSummary(
+                    fieldName, 
+                    years, 
+                    values
+                );
+   
+                setSummary(result.summary);
 
             } catch (err) {
                 console.error(err);
@@ -55,11 +49,10 @@ export default function AiSummary(props: AiSummaryTypes) {
                 // Turns off loading
                 setLoading(false);
             }
-
         } 
 
         // Trigger the API call
-        fetchSummary();
+        loadSummary();
     }, [fieldName, years, values]);
 
     // Don't render if field not selected
