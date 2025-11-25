@@ -1,48 +1,47 @@
 import { NextResponse } from "next/server";
 
-// Route Handler
+// API Route
 export async function POST (req: Request) {
   try {
-    // "Tegevusala"
-    const { fieldValue } = await req.json();
+      // Extract selected value
+      const { fieldValue } = await req.json();
 
-    const body = {
-  "query": [
-    {"code": "Näitaja", "selection": { "filter": "item", "values": [ "GR_W_AVG" ] } },
-    { "code": "Tegevusala", "selection": { "filter": "item", "values": [ fieldValue ] } } ],
-  "response": { "format": "json-stat2" }
-};
+      const body = {
+        "query": 
+          [
+          {"code": "Näitaja", "selection": { "filter": "item", "values": [ "GR_W_AVG" ] } },
+          { "code": "Tegevusala", "selection": { "filter": "item", "values": [ fieldValue ] } } 
+          ],
+          "response": { "format": "json-stat2" }
+      };
 
-// Making a request
-const URL = process.env.STAT_API_URL;
-const res = await fetch(URL!, {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: {"Content-Type": "application/json"},
-});
+      // Make a request to STAT API
+      const URL = process.env.STAT_API_URL;
+      const res = await fetch(URL!, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {"Content-Type": "application/json"},
+      });
 
-// Read JSON
-const data = await res.json();
+      // Read JSON
+      const data = await res.json();
 
-// Get years from values
-const years = Object.keys(data.dimension.Vaatlusperiood.category.index);
+      // Extract response data
+      const years = Object.keys(data.dimension.Vaatlusperiood.category.index);
+      const values = data.value;
+      const index = data.dimension.Tegevusala.category.index[fieldValue];
+      const valueText = data.dimension.Tegevusala.category.label[fieldValue] || fieldValue;
 
-// Get average salary from values
-const values = data.value;
+      return NextResponse.json({
+        fieldValue,
+        valueText,
+        years,
+        values
+      });
 
-// Get field valueTexts
-const index = data.dimension.Tegevusala.category.index[fieldValue];
-const valueText = data.dimension.Tegevusala.category.label[fieldValue] || fieldValue;
-
-return NextResponse.json({
-  fieldValue,
-  valueText,
-  years,
-  values});
-
-} catch (err) {
-  console.error(err);
-  return NextResponse.json({error: "Failed to fetch data"}, {status: 500});
-}
+    } catch (err) {
+      console.error(err);
+      return NextResponse.json({error: "Failed to fetch data"}, {status: 500});
+    }
 }
 
