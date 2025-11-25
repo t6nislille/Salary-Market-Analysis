@@ -2,22 +2,17 @@
 import React, {useState} from "react";
 import FieldDropdown from "../components/dropdown";
 
+// Display average salary data in dropdown menu selection
 export default function Home() {
-
-  // Hold salary data
   const [salaryData, setSalaryData] = useState<number[]>([]);
-
-  // Hold years
   const [years, setYears] = useState<string[]>([]);
+  const [selectedName, setSelectedName] = useState<string>("");
 
-  // Selected field
-  const [selectedName, setSelectedName] = useState<string>("Text");
-
-  // Update active field
+  // Update active field when value is selected
   const handleSelect = async (categoryKey: string) =>{
     setSelectedName(categoryKey);
 
-    // API call from average_salary
+    // Fetch from api/average_salary
     const response = await fetch(`/api/average_salary`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -25,8 +20,6 @@ export default function Home() {
     });
 
     const data = await response.json();
-
-    // Save data as
     setSelectedName(data.valueText);
     setYears(data.years);
     setSalaryData(data.values);
@@ -44,9 +37,7 @@ export default function Home() {
             <span>{salaryData[index]} €</span>
           </p>
         ))}
-
       </div>
-
     </main>
   );
 }
