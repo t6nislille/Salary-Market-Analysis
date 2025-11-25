@@ -27,5 +27,8 @@ export async function fetchAverageSalary(
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({fieldValue: categoryKey})
     });
+
+    if (!res.ok) throw new Error("Failed to fetch salary!");
+    
     return res.json();
 }
