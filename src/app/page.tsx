@@ -53,14 +53,25 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center p-6 space-y-6 max-w-2xl mx-auto">
+
+      {/* Title */}
       <h1 className="text-3xl font-bold">Keskmine palk</h1>
       
+      {/* Dropdown select*/}
       <FieldDropdown onSelect={handleSelect} />
+
+      {/* Error UI*/}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {/* Loading UI*/}
+      {loading && <p>Andmete laadimine...</p>}
+
+      {/* Year and Salary row */}
       <div>
         {years.map((year, index) => (
-          <p key={year}>
-            <span>{year}: </span>
+          <p key={year} className="text-sm">
+            <span className="font-medium">{year}: </span>
             <span>{salaryData[index]} €</span>
           </p>
         ))}
