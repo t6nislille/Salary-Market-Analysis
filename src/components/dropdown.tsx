@@ -6,12 +6,15 @@ import {fetchDropdownFields} from "../lib/api";
 
 // Set types
 type Field = { key: string; label: string };
+interface Props {
+    onSelect: (value: string) => void;
+}
 
 // Dropdown components
-export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> void}) {
+export default function FieldDropdown({onSelect}: Props) {
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set());
     const [selectedLabel, setSelectedLabel] = useState("Vali Valdkond:");
-    const [fields, setFields] = useState<Field[]>([]);
+    const [fields, setFields] = useState<FieldOption[]>([]);
 
     // Fetch fields
     useEffect(() => {
