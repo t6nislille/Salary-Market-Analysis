@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { fetchAiSummary } from "../lib/api";
+import type { AiSummaryResponse } from "../lib/types";
 
 // Define types
 interface AiSummaryTypes {
@@ -7,11 +9,13 @@ interface AiSummaryTypes {
     values: number[];
 }
 
-export default function AiSummary({ fieldName, years, values }: AiSummaryTypes) {
-    // Holds generated summary
+export default function AiSummary(props: AiSummaryTypes) {
+    const {fieldName, years, values} = props;
+
+    // Summary returned by the API
     const [summary, setSummary] = useState("");
 
-    // Track errors
+    // Error message if fetch fails
     const [error, setError] = useState("");
 
     // Show loader while API responds
@@ -19,7 +23,7 @@ export default function AiSummary({ fieldName, years, values }: AiSummaryTypes) 
 
     // Runs every time a change happens
     useEffect(() => {
-        // Prevents running in empty state
+        // Skips fetch when no field is selected
         if (!fieldName) return;
 
         // Fetch from API route
@@ -29,15 +33,14 @@ export default function AiSummary({ fieldName, years, values }: AiSummaryTypes) 
                 setError("");
                 setLoading(true);
                 
-            
-        
+                // Call api/ai_summery route
                 const res = await fetch("/api/ai_summery", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({fieldName, years, values}),
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({fieldName, years, values}),
                 });
 
-                // Error handle
+                // HTTP error handle
                 if (!res.ok) throw new Error("AI summary failed!");
 
                 const data = await res.json();
@@ -54,6 +57,8 @@ export default function AiSummary({ fieldName, years, values }: AiSummaryTypes) 
             }
 
         } 
+
+        // Trigger the API call
         fetchSummary();
     }, [fieldName, years, values]);
 
