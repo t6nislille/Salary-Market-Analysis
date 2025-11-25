@@ -7,4 +7,7 @@ export async function fetchDropdownFields() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({})
     });
+
+    const data = await res.json();
+    return data.fields ?? [];
 }
