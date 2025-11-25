@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 
-export default function AiSummary({ fieldName, years, values }) {
+// Define types
+interface AiSummaryTypes {
+    fieldName: string;
+    years: string[];
+    values: number[];
+}
+
+export default function AiSummary({ fieldName, years, values }: AiSummaryTypes) {
     // Holds generated summary
     const [summary, setSummary] = useState("");
 
