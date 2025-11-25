@@ -5,8 +5,6 @@ export async function POST(req: Request) {
     try {
         // Read request body
         const requestBody = await req.json();
-
-        // 
         const body = requestBody?.query || {
          "query": 
             [
@@ -35,7 +33,7 @@ export async function POST(req: Request) {
         const category = data?.dimension?.Tegevusala?.category?.label;
         if (!category) return NextResponse.json({error: "No fields found"}, {status: 500});
     
-        // List for field names (key + label)
+        // Restructure object structure
         const fields = Object.entries(category).map(([key, label]) => ({
             key,
             label
