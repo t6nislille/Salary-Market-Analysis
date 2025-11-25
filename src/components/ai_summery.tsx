@@ -31,27 +31,27 @@ export default function AiSummary({ fieldName, years, values }: AiSummaryTypes) 
                 
             
         
-        const res = await fetch("/api/ai_summery", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({fieldName, years, values}),
-        });
+                const res = await fetch("/api/ai_summery", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({fieldName, years, values}),
+                });
 
-        // Error handle
-        if (!res.ok) throw new Error("AI summary failed!");
+                // Error handle
+                if (!res.ok) throw new Error("AI summary failed!");
 
-        const data = await res.json();
+                const data = await res.json();
 
-        // Save summary to UI
-        setSummary(data.summary);
+                // Save summary to UI
+                setSummary(data.summary);
 
-        } catch (err) {
-            console.error(err);
-            setError("Kokkuvõtte loomine ebaõnnestus!");
-        } finally {
-            // Turns off loading
-            setLoading(false);
-        }
+            } catch (err) {
+                console.error(err);
+                setError("Kokkuvõtte loomine ebaõnnestus!");
+            } finally {
+                // Turns off loading
+                setLoading(false);
+            }
 
         } 
         fetchSummary();

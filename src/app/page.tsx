@@ -27,21 +27,21 @@ export default function Home() {
       setError("");
       setLoading(true);
 
-    // Fetch from api/average_salary
-    const response = await fetch(`/api/average_salary`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({fieldValue: categoryKey})
-    });
+      // Fetch from api/average_salary
+      const response = await fetch(`/api/average_salary`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({fieldValue: categoryKey})
+      });
 
-    if (!response.ok) throw new Error("Average Salary API request failed! ");
+      if (!response.ok) throw new Error("Average Salary API request failed! ");
 
-    const data = await response.json();
+      const data = await response.json();
 
-    // Save returned data
-    setSelectedName(data.valueText);
-    setYears(data.years);
-    setSalaryData(data.values);
+      // Save returned data
+      setSelectedName(data.valueText);
+      setYears(data.years);
+      setSalaryData(data.values);
 
     } catch (err) {
       console.error(err);
@@ -76,6 +76,7 @@ export default function Home() {
           </p>
         ))}
       </div>
+      
       {/* Summary from OpenAI */}
       {selectedName && years.length > 0 && (
         <AiSummary
