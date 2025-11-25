@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import {
     FieldOption,
     AverageSalaryResponse,
+    AiSummaryResponse,
 } from "../lib/types";
 
 // Fetch dropdown fields
@@ -29,6 +30,23 @@ export async function fetchAverageSalary(
     });
 
     if (!res.ok) throw new Error("Failed to fetch salary!");
-    
+
+    return res.json();
+}
+
+// Fetch AI summary
+export async function fetchAiSummary(
+    fieldName: string,
+    years: string[],
+    values: number[]
+): Promise<AiSummaryResponse> {
+    const res = await fetch("api/ai_summery", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({fieldName, years, values})
+    });
+
+    if (!res) throw new Error("Failed to fetch AI summary!");
+
     return res.json();
 }
