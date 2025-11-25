@@ -42,6 +42,13 @@ export default function Home() {
         ))}
       </div>
       {/* Summary from OpenAI */}
+      {selectedName && years.length > 0 && (
+        <AiSummary
+          fieldName={selectedName}
+          years={years}
+          values={salaryData}
+        />
+      )}
     </main>
   );
 }
