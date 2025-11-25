@@ -15,11 +15,25 @@ export async function POST(req: Request) {
         );
     }
 
+    // Prompt for OpenAI 
     const prompt = `
 Sinu käes on Eesti keskmise palga andmed valdkonna "${fieldName}" kohta.
 Aastad: ${years.join(", ")}
 Keskmine brutokuupalk (samas järjekorras): ${values.join(", ")}
-                    `
+
+Sinu ülesanded:
+1) Selgita lihtsas keeles, kas trend on tõusev, langev või stabiilne.
+2) Kirjelda lühidalt, mida tähendab see nende valdkondade töötajate jaoks.
+3) Paku ettevaatlik prognoos järgmise 2-3 aasta palgatasemele ( sõnaline kirjeldus, mitte numbrid).
+4) Too välja 3-5 oskust või tegevust, mis aitaksid selles valdkonnas palgatõusu saavutada.
+
+Vasta eesti keeles, struktureeritult:
+- Trend:
+- Kokkuvõte
+- Prognoos
+- Soovitused
+`.trim();
+
     // Make a request to OpenAI API
     const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
