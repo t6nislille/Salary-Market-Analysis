@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 // API Route
 export async function POST(req: Request) {
+    try {
 
     // Parse values
     const { fieldName, years, values } = await req.json();
@@ -65,4 +66,12 @@ Vasta eesti keeles, struktureeritult:
 
     // Return summary
     return NextResponse.json({ summary });
+
+    } catch (err) {
+        console.error(err);
+        return NextResponse.json(
+            { error: "Failed to create summary!"},
+            { status: 500 }
+        );
+    }
 }
