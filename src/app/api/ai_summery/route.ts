@@ -46,7 +46,7 @@ Vasta eesti keeles, struktureeritult:
             messages: [
                 {
                     role: "system",
-                    content: ""
+                    content: "Sa oled abivalmis vanem andmeanalüütik, kes selgitab palatrende lihtsas keeles",
                 },
                 {
                     role: "user",
