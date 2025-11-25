@@ -18,27 +18,22 @@ export default function FieldDropdown({onSelect}: Props) {
 
     // Fetch fields
     useEffect(() => {
-        const fetchFields = async () => {
-            const res = await fetch("/api/dropdown_fields", {
-                method: "POST",
-                body: JSON.stringify({})
-            });
-
-            const data = await res.json();
-            const fields = data.fields ?? [];
+        async function loadFields() {
+            const fields = await fetchDropdownFields();
             setFields(fields);
 
             // Automatically select the first available field
             const first = fields[0];
             if (!first) return; 
 
-            const {key, label} = first;
-            setSelectedKeys(new Set([key]));
-            setSelectedLabel(label);
-            onSelect(key);
+            setSelectedKeys(new Set([first.key]));
+            setSelectedLabel(first.label);
+            onSelect(first.key);
                       
-        };
-        fetchFields();
+        }
+
+        loadFields();
+        
         // Activate once
     }, []);
 
@@ -46,6 +41,7 @@ export default function FieldDropdown({onSelect}: Props) {
     const handleSelect = (keys: Selection) => {
         const key = Array.from(keys)[0] as string;
         const label = fields.find(f => f.key === key)?.label || key;
+
         setSelectedKeys(keys);
         setSelectedLabel(label);
         onSelect(key);
