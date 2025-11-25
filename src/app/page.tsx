@@ -13,7 +13,7 @@ export default function Home() {
   const [years, setYears] = useState<string[]>([]);
 
   // Holds selected field label
-  const [selectedName, setSelectedName] = useState<string>("");
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
 
   // Track error from API calls
   const [error, setError] = useState("");
@@ -39,7 +39,7 @@ export default function Home() {
       const data = await response.json();
 
       // Save returned data
-      setSelectedName(data.valueText);
+      setSelectedLabel(data.valueText);
       setYears(data.years);
       setSalaryData(data.values);
 
@@ -78,9 +78,9 @@ export default function Home() {
       </div>
       
       {/* Summary from OpenAI */}
-      {selectedName && years.length > 0 && (
+      {selectedLabel && years.length > 0 && (
         <AiSummary
-          fieldName={selectedName}
+          fieldName={selectedLabel}
           years={years}
           values={salaryData}
         />
