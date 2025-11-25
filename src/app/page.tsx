@@ -2,6 +2,8 @@
 import React, {useState} from "react";
 import FieldDropdown from "../components/dropdown";
 import AiSummary from "../components/ai_summery";
+import { fetchAverageSalary } from "../lib/api";
+import type { AverageSalaryResponse } from "../lib/types";
 
 // Display average salary data in dropdown menu selection
 export default function Home() {
