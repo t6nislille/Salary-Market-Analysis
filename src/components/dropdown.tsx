@@ -23,13 +23,15 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
             const fields = data.fields ?? [];
             setFields(fields);
 
-            // Automatically select first item
-            if (fields.length > 0) {
-                const firstKey = fields[0].key;
-                setSelectedKeys(new Set([firstKey]));
-                setSelectedLabel(fields[0].label);
-                onSelect(firstKey);
-            }           
+            // Automatically select the first available field
+            const first = fields[0];
+            if (!first) return; 
+
+            const {key, label} = first;
+            setSelectedKeys(new Set([key]));
+            setSelectedLabel(label);
+            onSelect(key);
+                      
         };
         fetchFields();
         // Activate once
@@ -44,25 +46,25 @@ export default function FieldDropdown({onSelect}: {onSelect: (value: string)=> v
         onSelect(key);
     };
 
-return (
-    <Dropdown>
-        <DropdownTrigger>
-            <Button className="capitalize" variant="bordered">
-                {selectedLabel}
-            </Button>
-        </DropdownTrigger>
-        {fields.length > 0 && (
-        <DropdownMenu
-            disallowEmptySelection={false}
-            selectedKeys={selectedKeys}
-            selectionMode="single"
-            onSelectionChange={handleSelect}
-        >
-            {fields.map((f) => (
-                <DropdownItem key={f.key}>{f.label}</DropdownItem>
-            ))}
-        </DropdownMenu>
-        )}
-    </Dropdown>
+    return (
+        <Dropdown>
+            <DropdownTrigger>
+                <Button className="capitalize" variant="bordered">
+                    {selectedLabel}
+                </Button>
+            </DropdownTrigger>
+            {fields.length > 0 && (
+            <DropdownMenu
+                disallowEmptySelection={false}
+                selectedKeys={selectedKeys}
+                selectionMode="single"
+                onSelectionChange={handleSelect}
+            >
+                {fields.map((f) => (
+                    <DropdownItem key={f.key}>{f.label}</DropdownItem>
+                ))}
+            </DropdownMenu>
+            )}
+        </Dropdown>
 );
 }
