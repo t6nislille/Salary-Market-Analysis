@@ -4,11 +4,10 @@ import { NextResponse } from "next/server";
 // API Route
 export async function POST(req: Request) {
     try {
-
         // Parse values
         const { fieldName, years, values } = await req.json();
 
-        const apiKey = process.env.OPENAI_API_KEY;
+        const apiKey = process.env.GROQ_API_KEY;
         if (!apiKey) {
             return NextResponse.json(
                 {error: "API KEY is not set"},
@@ -36,14 +35,14 @@ Vasta eesti keeles, struktureeritult:
 `.trim();
 
         // Make a request to OpenAI API
-        const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
+        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
-                Authorization: "Bearer ${apiKey}",
+                Authorization: `Bearer ${apiKey}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                model: "gpt-40",
+                model: "llama-3.1-8b-instant",
                 messages: [
                     {
                         role: "system",
@@ -60,8 +59,8 @@ Vasta eesti keeles, struktureeritult:
         });
 
         // Handle OpenAI errors
-        if (!openAiRes.ok) {
-                console.error("OpenAI API request failed:", await openAiRes.text());
+        if (!groqRes.ok) {
+                console.error("OpenAI API request failed:", await groqRes.text());
                 return NextResponse.json(
                     { error: "Failed to get summary!"},
                     { status: 500 }
@@ -69,7 +68,7 @@ Vasta eesti keeles, struktureeritult:
             }
 
         // Extract summary from API response
-        const json = await openAiRes.json();
+        const json = await groqRes.json();
         const summary = 
         json.choices?.[0]?.message?.content ??
         "Kokkuvõtte loomisel tekkis viga!";
