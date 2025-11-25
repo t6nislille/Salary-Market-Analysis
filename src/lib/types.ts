@@ -11,3 +11,8 @@ export interface AverageSalaryResponse {
     years: string[];
     values: number[];
 }
+
+// Response from /api/ai_summery
+export interface AiSummaryResponse {
+    summary: string;
+}
