@@ -14,6 +14,9 @@ export default function AiSummary({ fieldName, years, values }) {
             body: JSON.stringify({fieldName, years, values}),
         });
 
+        // Error handle
+        if (!res.ok) throw new Error("AI summary failed!");
+
         const data = await res.json();
 
         // Save summary to UI
@@ -23,8 +26,11 @@ export default function AiSummary({ fieldName, years, values }) {
         fetchSummary();
     }, [fieldName, years, values]);
 
+    // Don't render if field not selected
+    if (!fieldName) return null;
+
     return (
-        <div>
+        <div >
             <h3>Palgatrendi kokkuvõte OpenAI abiga</h3>
             <pre className="whitespace-pre-wrap text-sm leading-relaxed">
                 {summary}
