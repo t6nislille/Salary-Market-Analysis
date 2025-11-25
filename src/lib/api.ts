@@ -1,5 +1,7 @@
-import { error } from "console";
-import {FieldOption} from "../lib/types";
+import {
+    FieldOption,
+    AverageSalaryResponse,
+} from "../lib/types";
 
 // Fetch dropdown fields
 export async function fetchDropdownFields(): Promise<FieldOption[]> {
@@ -13,4 +15,9 @@ export async function fetchDropdownFields(): Promise<FieldOption[]> {
 
     const data = await res.json();
     return data.fields ?? [];
+}
+
+// Fetch average salary
+export async function fetchAverageSalary(categoryKey: string){
+    
 }
