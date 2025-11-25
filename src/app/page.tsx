@@ -10,8 +10,8 @@ export default function Home() {
   const [selectedName, setSelectedName] = useState<string>("");
 
   // Update active field when value is selected
-  const handleSelect = async (categoryKey: string) =>{
-    setSelectedName(categoryKey);
+  const handleSelect = async (categoryKey: string) => {
+    try {
 
     // Fetch from api/average_salary
     const response = await fetch(`/api/average_salary`, {
@@ -20,12 +20,18 @@ export default function Home() {
       body: JSON.stringify({fieldValue: categoryKey})
     });
 
+    if (!response.ok) throw new Error("Average Salary API request failed! ");
+
     const data = await response.json();
 
     // Save returned data
     setSelectedName(data.valueText);
     setYears(data.years);
     setSalaryData(data.values);
+
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
