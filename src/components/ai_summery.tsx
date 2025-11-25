@@ -6,12 +6,16 @@ export default function AiSummary({ fieldName, years, values }) {
 
     useEffect(() => {
 
-        // Fetch from API route
-        const res = fetch("/api/ai_summery", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({fieldName, years, values}),
-        });
+            // Fetch from API route
+            const fetchSummary = async () => {
+            const res = await fetch("/api/ai_summery", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({fieldName, years, values}),
+            });
+
+            const data = await res.json();
+        }
     })
 
     return (
