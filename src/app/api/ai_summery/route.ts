@@ -14,7 +14,7 @@ export async function POST(req: Request) {
             );
         }
 
-        // Prompt for OpenAI 
+        // Prompt for GROQ 
         const prompt = `
 Sinu käes on Eesti keskmise palga andmed valdkonna "${fieldName}" kohta.
 Aastad: ${years.join(", ")}
@@ -33,7 +33,7 @@ Vasta eesti keeles, struktureeritult:
 - Soovitused
 `.trim();
 
-        // Make a request to OpenAI API
+        // Make a request to GROQ API
         const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -57,9 +57,9 @@ Vasta eesti keeles, struktureeritult:
             }),
         });
 
-        // Handle OpenAI errors
+        // Handle GROQ errors
         if (!groqRes.ok) {
-                console.error("OpenAI API request failed:", await groqRes.text());
+                console.error("GROQ API request failed:", await groqRes.text());
                 return NextResponse.json(
                     { error: "Failed to get summary!"},
                     { status: 500 }
