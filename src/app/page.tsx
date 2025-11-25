@@ -38,7 +38,6 @@ export default function Home() {
       
       <FieldDropdown onSelect={handleSelect} />
       <div>
-        <h2>Valdkond: {selectedName}</h2>
         {years.map((year, index) => (
           <p key={year}>
             <span>{year}: </span>
