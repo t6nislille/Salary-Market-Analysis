@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import {
     FieldOption,
     AverageSalaryResponse,
@@ -18,6 +19,13 @@ export async function fetchDropdownFields(): Promise<FieldOption[]> {
 }
 
 // Fetch average salary
-export async function fetchAverageSalary(categoryKey: string){
-    
+export async function fetchAverageSalary(
+    categoryKey: string
+): Promise<AverageSalaryResponse> {
+    const res = await fetch("api/average_salary", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({fieldValue: categoryKey})
+    });
+    return res.json();
 }
