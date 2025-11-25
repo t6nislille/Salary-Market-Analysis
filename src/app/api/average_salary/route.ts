@@ -29,7 +29,6 @@ export async function POST (req: Request) {
       // Extract response data
       const years = Object.keys(data.dimension.Vaatlusperiood.category.index);
       const values = data.value;
-      const index = data.dimension.Tegevusala.category.index[fieldValue];
       const valueText = data.dimension.Tegevusala.category.label[fieldValue] || fieldValue;
 
       return NextResponse.json({
