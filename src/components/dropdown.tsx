@@ -1,6 +1,8 @@
 import type { Selection } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@heroui/react";
+import type {FieldOption} from "../lib/types";
+import {fetchDropdownFields} from "../lib/api";
 
 // Set types
 type Field = { key: string; label: string };
