@@ -88,3 +88,9 @@ GROQ_API_KEY= `Sisestage enda võti`
 | **Groq API** | LLaMA 3.1 mudel palgatrendi kokkuvõtteks |
 | **Statistikaamet API** | Palgaandmete allikas |
 
+---
+## Kuvatõmmis näide
+
+<img width="977" height="927" alt="toiduained" src="https://github.com/user-attachments/assets/2b2a0882-4c94-4b9c-896d-e23bf69fda73" />
+
+
