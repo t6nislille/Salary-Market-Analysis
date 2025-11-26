@@ -15,6 +15,7 @@ export default function FieldDropdown({onSelect}: Props) {
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set());
     const [selectedLabel, setSelectedLabel] = useState("Vali tegevusala");
     const [fields, setFields] = useState<FieldOption[]>([]);
+    const selectedKey = Array.from(selectedKeys)[0];
 
     // Fetch fields
     useEffect(() => {
@@ -69,7 +70,9 @@ export default function FieldDropdown({onSelect}: Props) {
   }}
                 
             >
-                {fields.map((f) => (
+                {fields
+                    .filter(f => f.key !== selectedKey)
+                    .map((f) => (
                     <DropdownItem key={f.key}>{f.label}</DropdownItem>
                 ))}
             </DropdownMenu>

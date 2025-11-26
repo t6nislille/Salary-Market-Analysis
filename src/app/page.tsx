@@ -19,7 +19,9 @@ export default function Home() {
 
   // Update active field when value is selected
   const handleSelect = async (fieldKey: string) => {
+   
     try {
+
       setError("");
       setLoading(true);
 
@@ -42,7 +44,7 @@ export default function Home() {
     <main className="flex flex-col items-center p-6 space-y-6 max-w-2xl mx-auto">
 
       {/* Title */}
-      <h1 className="text-3xl font-bold">Keskmine palk</h1>
+      <h1 className="text-3xl font-bold">Keskmine Bruutopalkalk</h1>
       
       {/* Dropdown select*/}
       <FieldDropdown onSelect={handleSelect} />
@@ -55,14 +57,14 @@ export default function Home() {
 
       {/* Year and Salary row */}
       {salary && (
-      <div className="bg-[#FBECEC] p-4 rounded-md shadow text-center mt-2">
-        {salary.years.map((year, index) => (
+      <div className="bg-[#e2dad9] p-4 rounded-md shadow text-center mt-2">
+        {salary && salary.years?.map((year, index) => (
           <p key={year} className="text-black">
             <span className="font-medium">{year}: </span>
             <span>{salary?.values[index]} €</span>
           </p>
         ))}
-      </div>
+      </div >
       )}
       {/* Summary from OpenAI */}
       {salary && salary.years.length > 0 && (
