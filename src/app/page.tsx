@@ -61,13 +61,17 @@ export default function Home() {
         {salary && salary.years?.map((year, index) => (
           <p key={year} className="text-black">
             <span className="font-medium">{year}: </span>
-            <span>{salary?.values[index]} €</span>
+              <span>
+                {salary?.values[index] === null
+                  ? "Andmed puuduvad"
+                  : `${salary.values[index]}€`}
+              </span>
           </p>
         ))}
       </div >
       )}
       {/* Summary from OpenAI */}
-      {salary && salary.years.length > 0 && (
+      {salary && salary.values.some(v => v !== null) && (
         <AiSummary
           fieldName={salary.valueText}
           years={salary.years}
