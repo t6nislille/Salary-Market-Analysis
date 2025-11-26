@@ -65,6 +65,16 @@ npm run dev
 ```bash
 http://localhost:3000
 ```
+
+## Muutujad
+AI kokkuvõtte funktsiooniks peab määrama järgmised muutujad:
+
+`Projekt EI sisalda turvakaalutlustel API võtmeid!`
+```bash
+STAT_API_URL=https://andmed.stat.ee/api/v1/et/stat/PA103
+GROQ_API_KEY= `Sisestage enda võti`
+```
+
 ---
 
 ## Tehnoloogiad
