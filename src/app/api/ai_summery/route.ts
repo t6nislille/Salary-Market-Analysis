@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
         // Prompt for GROQ 
         const prompt = `
-Sinu käes on Eesti keskmise palga andmed valdkonna "${fieldName}" kohta.
+Sinu käes on Eesti keskmise palga andmed valdkonna ${fieldName} kohta.
 Aastad: ${years.join(", ")}
 Keskmine brutokuupalk (samas järjekorras): ${values.join(", ")}
 

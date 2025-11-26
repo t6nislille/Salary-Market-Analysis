@@ -42,17 +42,17 @@ export default function FieldDropdown({onSelect}: Props) {
         <Dropdown>
             <DropdownTrigger>
                 <Button className="
-                    capitalize 
-                    bg-[#FBECEC] 
-                    text-black
-                    border-2 border-gray-400 
-                    rounded-md 
-                    shadow-md 
-                    hover:bg-[#F4DADA]
-                    transition
-                    px-5 py-3
-                    text-base
-                    font-medium
+                    capitalize
+                    bg-[var(--ap-bg)]
+                    text-[var(--ap-text)]
+                    border border-[var(--ap-gray)]
+                    rounded-md
+                    px-6 py-3
+                    text-lg
+                    shadow-sm
+                    hover:bg-white
+                    hover:border-[var(--ap-red)]
+                    transition-colors   
                     ">
                     {selectedLabel}
                 </Button>

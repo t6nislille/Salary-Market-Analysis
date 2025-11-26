@@ -55,9 +55,9 @@ export default function Home() {
 
       {/* Year and Salary row */}
       {salary && (
-      <div>
+      <div className="bg-[#FBECEC] p-4 rounded-md shadow text-center mt-2">
         {salary.years.map((year, index) => (
-          <p key={year} className="text-sm">
+          <p key={year} className="text-black">
             <span className="font-medium">{year}: </span>
             <span>{salary?.values[index]} €</span>
           </p>
