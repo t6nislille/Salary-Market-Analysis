@@ -7,17 +7,9 @@ import type { AverageSalaryResponse } from "../lib/types";
 
 // Display average salary data in dropdown menu selection
 export default function Home() {
+  
   // Store average_salary response
   const [salary, setSalary] = useState<AverageSalaryResponse | null>(null);
-
-  // Holds all salary numbers
-  //const [salaryData, setSalaryData] = useState<number[]>([]);
-
-  // Holds all salary years
-  // const [years, setYears] = useState<string[]>([]);
-
-  // Holds selected field label
-  // const [selectedLabel, setSelectedLabel] = useState<string>("");
 
   // Track error from API calls
   const [error, setError] = useState("");
