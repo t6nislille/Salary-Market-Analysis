@@ -62,6 +62,7 @@ export default function Home() {
       {loading && <p>Andmete laadimine...</p>}
 
       {/* Year and Salary row */}
+      {salary && (
       <div>
         {salary.years.map((year, index) => (
           <p key={year} className="text-sm">
@@ -70,7 +71,7 @@ export default function Home() {
           </p>
         ))}
       </div>
-      
+      )}
       {/* Summary from OpenAI */}
       {salary && salary.years.length > 0 && (
         <AiSummary
