@@ -13,23 +13,14 @@ interface Props {
 // Dropdown components
 export default function FieldDropdown({onSelect}: Props) {
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set());
-    const [selectedLabel, setSelectedLabel] = useState("Vali Valdkond:");
+    const [selectedLabel, setSelectedLabel] = useState("Vali tegevusala");
     const [fields, setFields] = useState<FieldOption[]>([]);
 
     // Fetch fields
     useEffect(() => {
         async function loadFields() {
             const fields = await fetchDropdownFields();
-            setFields(fields);
-
-            // Automatically select the first available field
-            const first = fields[0];
-            if (!first) return; 
-
-            setSelectedKeys(new Set([first.key]));
-            setSelectedLabel(first.label);
-            onSelect(first.key);
-                      
+            setFields(fields);       
         }
 
         loadFields();
