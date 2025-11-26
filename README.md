@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Eesti Palgaturu Analüüs
 
-First, run the development server:
+## Eesti Keskmise Palga Trendid
 
+Veebirakendus, mis võimaldab kasutajal valida tegevusala ning näha:
+- viimase nelja aasta keskmisi brutokuupalku Statistikaameti API-st
+- automaatselt genereeritud trendi kokkuvõtet (Groq LLaMA 3.1 abil)
+- lihtsat ja kasutajasõbralikku UI-d
+
+Rakendus on loodud Next.js 16, React 19 ja HeroUI komponentidega.
+
+---
+
+## Funktsionaalsus
+### 1. Tegevusala valimine
+Kasutaja valib dropdownist tegevusala (nt Toiduainete Tootmine)
+
+### 2. Reaalajas Statistikaameti API päring
+Rakendus teeb päringu:
+Query:<br />
+-*Näitaja*: GR_W_AVG (keskmine brutokuupalk)<br />
+-*Tegevusala*: valitud kood (nt J63)<br />
+
+### 3. Palganumbrite kuvamine
+Kuvatakse:
+- 2021
+- 2022
+- 2023
+- 2024 <br />
+Koos vastavate palkadega.
+
+### 4. AI-põhine kokkuvõte
+Rakendus loob:
+- palgatrendi analüüsi
+- prognoosi järgmisteks aastateks
+- soovituse palgatõusu saavutamiseks
+
+AI vastab *eesti keeles ja struktureeritult*
+
+## Paigaldamine
+
+### 1. Klooni projekt
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/t6nislille/Salary-Market-Analysis.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Installi dependencyd
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Lisa `.env` fail
+```bash
+STAT_API_URL=""
+GROQ_API_KEY=""
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Käivita arenduskeskond
+```bash
+npm run dev
+```
 
-## Learn More
+### 5. Ava veebibrauseris
+```bash
+http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Muutujad
+AI kokkuvõtte funktsiooniks peab määrama järgmised muutujad:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`Projekt EI sisalda turvakaalutlustel API võtmeid!`
+```bash
+STAT_API_URL=https://andmed.stat.ee/api/v1/et/stat/PA103
+GROQ_API_KEY= `Sisestage enda võti`
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Tehnoloogiad
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Tehnoloogia | Kasutus |
+|------------|---------|
+| **Next.js 16** | App routing, API route’id |
+| **React 19** | Komponentide loogika |
+| **HeroUI** | Dropdownid ja UI komponendid |
+| **TypeScript** | Tugevad tüübid ja turvaline arendus |
+| **Groq API** | LLaMA 3.1 mudel palgatrendi kokkuvõtteks |
+| **Statistikaamet API** | Palgaandmete allikas |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
