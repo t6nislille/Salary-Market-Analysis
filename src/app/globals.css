@@ -2,9 +2,9 @@
 
 :root {
   --ap-red: #D71A21;
-  --ap-bg: #a88784;
+  --ap-bg: #e2dad9;
   --ap-text: #231F20;
-  --ap-gray: #CFC4C2;
+  --ap-gray: #1a0907;
 }
 
 @theme inline {
