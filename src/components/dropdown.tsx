@@ -41,7 +41,19 @@ export default function FieldDropdown({onSelect}: Props) {
     return (
         <Dropdown>
             <DropdownTrigger>
-                <Button className="capitalize" variant="bordered">
+                <Button className="
+                    capitalize 
+                    bg-[#FBECEC] 
+                    text-black
+                    border-2 border-gray-400 
+                    rounded-md 
+                    shadow-md 
+                    hover:bg-[#F4DADA]
+                    transition
+                    px-5 py-3
+                    text-base
+                    font-medium
+                    ">
                     {selectedLabel}
                 </Button>
             </DropdownTrigger>
@@ -51,6 +63,11 @@ export default function FieldDropdown({onSelect}: Props) {
                 selectedKeys={selectedKeys}
                 selectionMode="single"
                 onSelectionChange={handleSelect}
+                className="bg-[#FBECEC] text-black max-h-64 overflow-y-auto rounded-md shadow-xl border border-gray-300"
+                itemClasses={{
+                base: "hover:bg-[#F4DADA] text-black",
+  }}
+                
             >
                 {fields.map((f) => (
                     <DropdownItem key={f.key}>{f.label}</DropdownItem>
