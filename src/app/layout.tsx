@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import TopBar from "../components/topBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body
         className="bg-[var(--ap-bg)] text-[var(--ap-text)] min-h-screen"
       >
+        <TopBar></TopBar>
         {children}
       </body>
     </html>
