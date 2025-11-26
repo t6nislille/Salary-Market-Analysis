@@ -26,26 +26,16 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
 
   // Update active field when value is selected
-  const handleSelect = async (categoryKey: string) => {
+  const handleSelect = async (fieldKey: string) => {
     try {
       setError("");
       setLoading(true);
 
-      // Fetch from api/average_salary
-      const response = await fetch(`/api/average_salary`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({fieldValue: categoryKey})
-      });
-
-      if (!response.ok) throw new Error("Average Salary API request failed! ");
-
-      const data = await response.json();
+      // Fetch average salary from STAT API
+      const data = await fetchAverageSalary(fieldKey);
 
       // Save returned data
-      setSelectedLabel(data.valueText);
-      setYears(data.years);
-      setSalaryData(data.values);
+      setSalary(data);
 
     } catch (err) {
       console.error(err);
@@ -73,20 +63,20 @@ export default function Home() {
 
       {/* Year and Salary row */}
       <div>
-        {years.map((year, index) => (
+        {salary.years.map((year, index) => (
           <p key={year} className="text-sm">
             <span className="font-medium">{year}: </span>
-            <span>{salaryData[index]} €</span>
+            <span>{salary?.values[index]} €</span>
           </p>
         ))}
       </div>
       
       {/* Summary from OpenAI */}
-      {selectedLabel && years.length > 0 && (
+      {salary && salary.years.length > 0 && (
         <AiSummary
-          fieldName={selectedLabel}
-          years={years}
-          values={salaryData}
+          fieldName={salary.valueText}
+          years={salary.years}
+          values={salary.values}
         />
       )}
     </main>
